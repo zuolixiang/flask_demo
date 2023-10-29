@@ -10,7 +10,9 @@
 import requests
 
 url = 'http://localhost:5000/process_data'  # 根据您的Flask应用的端口和地址进行相应更改
-data = {'data': 'hello world'}  # 替换为您想要发送的数据
+data = {'data': 'hello world',
+        'iteration': 100,
+        'test': 'test'}  # 替换为您想要发送的数据
 
 response = requests.post(url, data=data)
 

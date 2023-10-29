@@ -10,6 +10,7 @@
 from flask import Flask, request
 import redis
 from celery import Celery
+import json
 
 app = Flask(__name__)
 redis_client = redis.Redis(host='localhost', port=6379)
@@ -24,8 +25,14 @@ def test(data):
 @app.route('/process_data', methods=['POST'])
 def process_data():
     data = request.form['data']
+    iteration = request.form['iteration']
     # 将请求参数发布到Redis频道
-    redis_client.publish('task_channel', data)
+
+    json_data = json.dumps({
+        'data': data,
+        'iteration': iteration
+    })
+    redis_client.publish('task_channel', json_data)
     return 'Request accepted and queued for processing'
 
 
