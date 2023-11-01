@@ -9,11 +9,15 @@
 
 import requests
 
-url = 'http://localhost:5000/process_data'  # 根据您的Flask应用的端口和地址进行相应更改
-data = {'data': 'hello world',
-        'iteration': 100,
-        'test': 'test'}  # 替换为您想要发送的数据
+url = 'http://localhost:8000/EIMS/analyse/get_result'  # 根据您的Flask应用的端口和地址进行相应更改
+for i in range(20):
+        uuid = 'hailiyang_' + str(i)
+        data = {
+                'data': 'hello world',
+                'iteration': 100,
+                'uuid': uuid
+        }  # 替换为您想要发送的数据
 
-response = requests.post(url, data=data)
+        response = requests.post(url, data=data)
 
-print(response.text)  # 打印服务器的响应
+        print(response.text)  # 打印服务器的响应
